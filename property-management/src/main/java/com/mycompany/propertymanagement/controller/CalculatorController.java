@@ -1,5 +1,6 @@
 package com.mycompany.propertymanagement.controller;
 
+import com.mycompany.propertymanagement.dto.CalculatorDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,5 +19,10 @@ public class CalculatorController {
                            @PathVariable Double n2) {
         if (n1 > n2) return n1 - n2;
         else return n2 - n1;
+    }
+
+    @PostMapping("/multiply")
+    public Double multiply(@RequestBody CalculatorDTO calculatorDTO) {
+        return calculatorDTO.getN1() * calculatorDTO.getN2();
     }
 }
