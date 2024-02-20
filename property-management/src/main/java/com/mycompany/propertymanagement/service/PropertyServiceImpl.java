@@ -1,10 +1,14 @@
 package com.mycompany.propertymanagement.service;
 
 import com.mycompany.propertymanagement.dto.PropertyDTO;
-import com.mycompany.propertymanagement.entity.PropertyEntity;
+import com.mycompany.propertymanagement.entity.Property;
 import com.mycompany.propertymanagement.repository.PropertyRepository;
+import com.mycompany.propertymanagement.utils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
@@ -14,14 +18,14 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public PropertyDTO saveProperty(PropertyDTO dto) {
-        PropertyEntity pe = new PropertyEntity();
-        pe.setTitle(dto.getTitle());
-        pe.setDescription(dto.getDescription());
-        pe.setAddress(dto.getAddress());
-        pe.setOwnerName(dto.getOwnerName());
-        pe.setOwnerEmail(dto.getOwnerEmail());
-        propertyRepository.save(pe);
-        return null;
+        Property pe = propertyRepository.save(PropertyUtils.convertDtoToEntity(dto));
+        return PropertyUtils.convertEntityToDto(pe);
+    }
+
+    @Override
+    public List<PropertyDTO> getAll() {
+        List<Property> propertyList = (List<Property>) propertyRepository.findAll();
+        return propertyList.stream().map(PropertyUtils::convertEntityToDto).toList();
     }
 
 }

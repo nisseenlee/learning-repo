@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PropertyEntity {
+public class Property {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
