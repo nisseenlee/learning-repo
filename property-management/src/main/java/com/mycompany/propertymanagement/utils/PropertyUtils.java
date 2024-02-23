@@ -11,8 +11,6 @@ public class PropertyUtils {
         pe.setTitle(dto.getTitle());
         pe.setDescription(dto.getDescription());
         pe.setAddress(dto.getAddress());
-        pe.setOwnerName(dto.getOwnerName());
-        pe.setOwnerEmail(dto.getOwnerEmail());
         pe.setPrice(dto.getPrice());
 
         return pe;
@@ -25,8 +23,6 @@ public class PropertyUtils {
         dto.setTitle(pe.getTitle());
         dto.setDescription(pe.getDescription());
         dto.setAddress(pe.getAddress());
-        dto.setOwnerName(pe.getOwnerName());
-        dto.setOwnerEmail(pe.getOwnerEmail());
         dto.setPrice(pe.getPrice());
 
         return dto;
