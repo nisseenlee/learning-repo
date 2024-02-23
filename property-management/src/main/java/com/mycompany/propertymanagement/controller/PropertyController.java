@@ -3,6 +3,7 @@ package com.mycompany.propertymanagement.controller;
 import com.mycompany.propertymanagement.dto.PropertyDTO;
 import com.mycompany.propertymanagement.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,9 @@ import java.util.List;
 @RequestMapping("/api/v1/properties")
 public class PropertyController {
 
+    @Value("${spring.datasource.url:}") // ':' indicates that if the property is not found, show no error
+    private String datasourceUrl;
+
     @Autowired
     private PropertyService propertyService;
 
@@ -20,6 +24,11 @@ public class PropertyController {
     @GetMapping("/hello")
     public String helloWorld() {
         return "Hello World!";
+    }
+
+    @GetMapping("/datasource-url")
+    public String showDatasourceUrl() {
+        return datasourceUrl;
     }
 
     @PostMapping("/save")
