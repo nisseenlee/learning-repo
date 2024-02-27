@@ -13,8 +13,12 @@ import java.util.Optional;
 @Service
 public class PropertyServiceImpl implements PropertyService {
 
+    private final PropertyRepository propertyRepository;
+
     @Autowired
-    private PropertyRepository propertyRepository;
+    public PropertyServiceImpl(PropertyRepository propertyRepository) {
+        this.propertyRepository = propertyRepository;
+    }
 
     @Override
     public PropertyDTO saveProperty(PropertyDTO dto) {
@@ -68,7 +72,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public void deletePropertyById(Long id) {
-        propertyRepository.findById(id).ifPresent(property -> propertyRepository.delete(property));
+        propertyRepository.findById(id).ifPresent(propertyRepository::delete);
     }
 
 }

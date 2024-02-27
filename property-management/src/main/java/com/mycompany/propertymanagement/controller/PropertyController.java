@@ -17,8 +17,12 @@ public class PropertyController {
     @Value("${spring.datasource.url:}") // ':' indicates that if the property is not found, show no error
     private String datasourceUrl;
 
+    private final PropertyService propertyService;
+
     @Autowired
-    private PropertyService propertyService;
+    public PropertyController(PropertyService propertyService) {
+        this.propertyService = propertyService;
+    }
 
     // http://localhost:8080/api/v1/properties/hello
     @GetMapping("/hello")

@@ -5,6 +5,10 @@ import com.mycompany.propertymanagement.entity.User;
 
 public class UserUtils {
 
+    private UserUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static User convertDtoToEntity(UserDTO dto) {
         User u = new User();
 

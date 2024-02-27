@@ -5,6 +5,10 @@ import com.mycompany.propertymanagement.entity.Property;
 
 public class PropertyUtils {
 
+    private PropertyUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static Property convertDtoToEntity(PropertyDTO dto) {
         Property pe = new Property();
 
