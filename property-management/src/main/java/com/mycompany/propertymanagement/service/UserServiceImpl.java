@@ -27,8 +27,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO login(String username, String password) {
-        return null;
+    public UserDTO login(String email, String password) {
+        Optional<User> userOptional = userRepository.findByOwnerEmailAndPassword(email, password);
+        return userOptional.map(UserUtils::convertEntityToDto).orElseGet(UserDTO::new);
     }
 
     @Override

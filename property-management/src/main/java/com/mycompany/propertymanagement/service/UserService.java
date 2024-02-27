@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserService {
 
     UserDTO register(UserDTO userDTO);
-    UserDTO login(String username, String password);
+    UserDTO login(String email, String password);
     List<UserDTO> getAll();
     UserDTO getById(Long id);
 }
