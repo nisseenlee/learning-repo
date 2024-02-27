@@ -11,20 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) {
-        userDTO =  userService.register(userDTO);
-        return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
+    @GetMapping()
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> userList = userService.getAll();
+        return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+    @PostMapping("/register")
+    public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) {
+        userDTO = userService.register(userDTO);
+        return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
 }

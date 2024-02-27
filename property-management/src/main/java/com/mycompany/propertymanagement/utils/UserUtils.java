@@ -24,7 +24,6 @@ public class UserUtils {
         dto.setOwnerName(u.getOwnerName());
         dto.setOwnerEmail(u.getOwnerEmail());
         dto.setPhone(u.getPhone());
-        dto.setPassword(u.getPassword());
 
         return dto;
     }

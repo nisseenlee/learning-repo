@@ -31,15 +31,15 @@ public class PropertyController {
         return datasourceUrl;
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<PropertyDTO> saveProperty(@RequestBody PropertyDTO propertyDTO) {
-        return new ResponseEntity<>(propertyService.saveProperty(propertyDTO), HttpStatus.CREATED);
-    }
-
-    @GetMapping("/all")
+    @GetMapping()
     public ResponseEntity<List<PropertyDTO>> getAllProperties() {
         List<PropertyDTO> propertyDTOList = propertyService.getAll();
         return new ResponseEntity<>(propertyDTOList, HttpStatus.OK);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<PropertyDTO> saveProperty(@RequestBody PropertyDTO propertyDTO) {
+        return new ResponseEntity<>(propertyService.saveProperty(propertyDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
