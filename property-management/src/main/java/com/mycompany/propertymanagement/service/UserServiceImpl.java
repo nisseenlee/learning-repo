@@ -2,6 +2,8 @@ package com.mycompany.propertymanagement.service;
 
 import com.mycompany.propertymanagement.dto.UserDTO;
 import com.mycompany.propertymanagement.entity.User;
+import com.mycompany.propertymanagement.exception.BusinessException;
+import com.mycompany.propertymanagement.exception.ErrorModel;
 import com.mycompany.propertymanagement.repository.UserRepository;
 import com.mycompany.propertymanagement.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO register(UserDTO userDTO) {
-        User user = UserUtils.convertDtoToEntity(userDTO);
-        return UserUtils.convertEntityToDto(userRepository.save(user));
+        Optional<User> userOptional = userRepository.findByOwnerEmail(userDTO.getOwnerEmail());
+        if (userOptional.isPresent()) {
+            throw new BusinessException(List.of(
+                    new ErrorModel("INVALID_REGISTER", "Email already exists")
+            ));
+        }
+
+        return UserUtils.convertEntityToDto(userRepository.save(UserUtils.convertDtoToEntity(userDTO)));
     }
 
     @Override
     public UserDTO login(String email, String password) {
         Optional<User> userOptional = userRepository.findByOwnerEmailAndPassword(email, password);
-        return userOptional.map(UserUtils::convertEntityToDto).orElseGet(UserDTO::new);
+        return userOptional.map(UserUtils::convertEntityToDto).orElseThrow(() ->
+                new BusinessException(List.of(
+                        new ErrorModel("INVALID_LOGIN", "Incorrect email or password")
+                ))
+        );
     }
 
     @Override
