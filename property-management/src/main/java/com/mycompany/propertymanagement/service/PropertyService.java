@@ -9,6 +9,7 @@ public interface PropertyService {
     PropertyDTO saveProperty(PropertyDTO propertyDTO);
     PropertyDTO getById(Long id);
     List<PropertyDTO> getAll();
+    List<PropertyDTO> getAllByUser(Long userId);
     PropertyDTO updateProperty(Long id, PropertyDTO propertyDTO);
     PropertyDTO updatePropertyDescription(Long id, String description);
     void deletePropertyById(Long id);

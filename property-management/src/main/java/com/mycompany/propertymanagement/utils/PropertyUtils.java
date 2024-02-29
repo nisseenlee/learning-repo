@@ -28,6 +28,9 @@ public class PropertyUtils {
         dto.setDescription(pe.getDescription());
         dto.setAddress(pe.getAddress());
         dto.setPrice(pe.getPrice());
+        dto.setUserId(pe.getUser().getId());
+        dto.setOwnerName(pe.getUser().getOwnerName());
+        dto.setOwnerEmail(pe.getUser().getOwnerEmail());
 
         return dto;
     }
